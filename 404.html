@@ -42,23 +42,38 @@
         margin-top: 10px;
     }
 
-    .glitch {
-        animation: flicker .5s infinite;
+    .alert {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: red;
+        font-size: 14px;
+        opacity: 0;
     }
 
-    @keyframes flicker {
-        0% { opacity: 1; }
-        45% { opacity: 0.8; }
-        50% { opacity: 0.3; }
-        55% { opacity: 1; }
-        100% { opacity: 0.9; }
+    .alert.show {
+        opacity: 1;
+        animation: glitch 0.15s infinite;
+    }
+
+    @keyframes glitch {
+        0% { transform: translateX(-50%) translate(0,0); }
+        25% { transform: translateX(-50%) translate(-2px,1px); }
+        50% { transform: translateX(-50%) translate(2px,-1px); }
+        75% { transform: translateX(-50%) translate(-1px,2px); }
+        100% { transform: translateX(-50%) translate(0,0); }
     }
 </style>
 </head>
 
 <body>
 
-<div class="container glitch">
+<div class="alert" id="alert">
+    console: system anomaly detected
+</div>
+
+<div class="container">
     <div class="code">404</div>
     <div class="text">not found</div>
 </div>
@@ -69,6 +84,39 @@
     console.log("ACCESS PATH:");
     console.log("https://drive.google.com/drive/folders/1mb2PTIYIdztVRjrSpObHdyyyLNgIxqKP");
     console.log("----------------------------");
+
+    const alertBox = document.getElementById("alert");
+
+    function playBeep() {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        oscillator.type = "square";
+        oscillator.frequency.setValueAtTime(900, ctx.currentTime);
+
+        oscillator.connect(gain);
+        gain.connect(ctx.destination);
+
+        oscillator.start();
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.1);
+
+        setTimeout(() => {
+            oscillator.stop();
+            ctx.close();
+        }, 100);
+    }
+
+    function triggerAlert() {
+        alertBox.classList.add("show");
+        playBeep();
+
+        setTimeout(() => {
+            alertBox.classList.remove("show");
+        }, 250);
+    }
+
+    setInterval(triggerAlert, 1200);
 </script>
 
 </body>
