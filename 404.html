@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>404 Not Found</title>
+
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: black;
+        color: white;
+        font-family: monospace;
+    }
+
+    .container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+    .code {
+        font-size: 90px;
+        font-weight: bold;
+        letter-spacing: 5px;
+    }
+
+    .text {
+        opacity: 0.6;
+        margin-top: 10px;
+    }
+
+    .glitch {
+        animation: flicker .5s infinite;
+    }
+
+    @keyframes flicker {
+        0% { opacity: 1; }
+        45% { opacity: 0.8; }
+        50% { opacity: 0.3; }
+        55% { opacity: 1; }
+        100% { opacity: 0.9; }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container glitch">
+    <div class="code">404</div>
+    <div class="text">not found</div>
+</div>
+
+<script>
+    console.log(":: system anomaly detected ::");
+    console.log("instance mismatch confirmed");
+    console.log("----------------------------");
+    console.log("ACCESS PATH:");
+    console.log("https://drive.google.com/drive/folders/1mb2PTIYIdztVRjrSpObHdyyyLNgIxqKP");
+    console.log("----------------------------");
+</script>
+
+</body>
+</html>

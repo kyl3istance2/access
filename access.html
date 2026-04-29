@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>q.inc</title>
+    <style>
+        body {
+            background-color: black;
+            color: #ffffff;
+            font-family: monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        input, button {
+            margin-top: 10px;
+            padding: 10px;
+            background: black;
+            border: 1px solid #ffffff;
+            color: #ffffff;
+            font-family: monospace;
+        }
+
+        button:hover {
+            background-color: #ffffff;
+            color: black;
+            cursor: pointer;
+        }
+
+        #error {
+            color: red;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>code:</h2>
+    <input type="text" id="codeInput" placeholder="enter code">
+    <button onclick="checkCode()">validate</button>
+
+    <div id="error">invalid code</div>
+
+    <script>
+        function checkCode() {
+            const correctCode = "12345";
+            const userInput = document.getElementById("codeInput").value;
+
+            if (userInput === correctCode) {
+                window.location.href = "404.html";
+            } else {
+                document.getElementById("error").style.display = "block";
+            }
+        }
+    </script>
+
+</body>
+</html>
